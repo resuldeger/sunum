@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Bölünme</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+	#info {
+		display:none;
+	  font-size: 16px;
+	  line-height: 1.5;
+	  margin: 0 auto;
+	  max-width: 800px;
+	  padding: 20px;
+	}
+
+	#info h1 {
+	  font-size: 24px;
+	  font-weight: bold;
+	  margin-bottom: 20px;
+	}
+
+	#info b {
+	  font-weight: bold;
+	}
+
+	#info strong {
+	  font-weight: bold;
+	}
+
+	#info br {
+	  content: "";
+	  display: block;
+	  margin-bottom: 20px;
+	}
+	.success{
+		border-color: green !important;
+	}
+    
+    .box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 10px;
+	  min-height:10vh;
+    }
+    
+    .drag-item {
+      display: inline-block;
+      padding: 10px;
+      margin: 5px;
+      background-color: #f2f2f2;
+      color: #333;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: center;
+      cursor: move;
+	  display: grid;
+    align-content: center;
+    }
+    
+    .images {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .dropzone {
+		width: 19%;
+		height: auto;
+		margin: 5px;
+		
+		border: 2px dashed #333;
+		border-radius: 4px;
+		text-align: -webkit-center;
+    }
+    
+    .drag-image {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: move;
+    }
+    
+    /* Mobil cihazlarda boyutlandırma için CSS */
+    @media screen and (max-width: 480px) {
+      .drag-item {
+        margin: 5px 5px;
+      }
+      .images {
+        flex-direction: row;
+        align-items: center;
+      }
+	  .dropzone {
+		width: 33%;
+		}
+	  
+    } 
+	 
+	
+	.transl{
+		
+	}
+	</style>
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+	  <div class="drag-item" draggable="true" zone-id="2">Metafaz</div>
+      <div class="drag-item" draggable="true" zone-id="1">Profaz</div>
+      <div class="drag-item" draggable="true" zone-id="4">Telofaz</div>
+      <div class="drag-item" draggable="true" zone-id="3">Anafaz</div>
+      <div class="drag-item" draggable="true" zone-id="5">Sitokinez</div>
+      
+    </div>
+    <div class="images">
+      <div class="dropzone" zone-id="1"><img src="images/1.jpeg" class="drag-image" draggable="true" alt="Görsel 1"></div>
+      <div class="dropzone" zone-id="3"><img src="images/2.jpeg" class="drag-image" draggable="true" alt="Görsel 2"></div>
+      <div class="dropzone" zone-id="2"><img src="images/3.jpeg" class="drag-image" draggable="true" alt="Görsel 3"></div>
+      <div class="dropzone" zone-id="4"><img src="images/4.jpeg" class="drag-image" draggable="true" alt="Görsel 4"></div>
+      <div class="dropzone" zone-id="5"><img src="images/5.jpeg" class="drag-image" draggable="true" alt="Görsel 5"></div>
+    </div>
+</div>
+
+<div id="info">
+<h1>Mitoz Bölünme</h1>
+<b>Profaz (Prophase):</b> Kromatin iplikleri kısalarak kromozomlar meydana gelir. Her bir kromozom iki kromatid içerir ve bunlar bir sentromer adı verilen birleşim noktasıyla birbirlerine bağlanırlar. Çekirdek zarı ve nükleolus kaybolur, sentrozomlar kutuplara hareket eder ve mitotik iplikler çekirdek etrafında oluşur.
+
+<strong>Metafaz (Metaphase):</strong> Kromozomlar mitotik iplikler aracılığıyla hücrenin ekvator bölgesine hizalanır. Kromozomlar merkezdeki çizgi (metafaz levhası) üzerinde düzenli bir şekilde sıralanırlar.
+<br>
+<strong>Anafaz (Anaphase):</strong> Kromatidlerin sentromerleri ayrılır ve mitotik iplikler tarafından zıt kutuplara taşınır. Bu sayede kromatidler ayrı kromozomlar haline gelirler.
+<br>
+<strong>Telofaz (Telophase):</strong> Kromozomlar, kutuplara doğru hareket ederken kromatin ipliklerine geri dönüşürler. Çekirdek zarı ve nükleolus tekrar oluşur, mitotik iplikler kaybolur. Bu safhanın sonunda, tek hücreli organizmalar için, sitokinez adı verilen bir süreçle hücre bölünür ve iki ayrı hücre oluşur. Çok hücreli organizmalarda ise, sitokinez bir sonraki safhada gerçekleşir.
+<br>
+<strong>Sitokinez (Cytokinesis):</strong> Telofaz safhasının sonunda, hücrenin ortasında bir çentik oluşur ve bu çentik hücre bölünmesine neden olur. Hayvan hücrelerinde, bir hücre zarı sıkışır ve hücre iki ayrı hücreye ayrılır. Bitki hücrelerinde ise, hücre duvarı, hücre zarının içine doğru oluşur ve sonunda iki ayrı hücre oluşur.
+
+</div>
+	   
+	   	  
+  <!-- Burada gerekli JavaScript kütüphanelerini yüklüyoruz -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+    /* Burada JavaScript kodlarınızı yazabilirsiniz */
+    const dragItems = document.querySelectorAll('.drag-item');
+    const dropzones = document.querySelectorAll('.dropzone');
+    
+    dragItems.forEach(dragItem => {
+      dragItem.addEventListener('dragstart', () => {
+        dragItem.classList.add('dragging');
+      });
+    
+      dragItem.addEventListener('dragend', () => {
+        dragItem.classList.remove('dragging');
+      });
+    });
+    
+    dropzones.forEach(dropzone => {
+      dropzone.addEventListener('dragover', e => {
+        e.preventDefault();
+        const activeDragItem = document.querySelector('.dragging');
+        dropzone.classList.add('hovered');
+      });
+    
+      dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('hovered');
+      });
+    
+      dropzone.addEventListener('drop', () => {
+        const activeDragItem = document.querySelector('.dragging');
+		
+		const currentZoneId = dropzone.getAttribute("zone-id");
+    const currentDragZoneId = activeDragItem.getAttribute("zone-id");
+	console.log(currentDragZoneId);
+	console.log(currentZoneId);
+    
+    if (currentZoneId === currentDragZoneId) {
+       dropzone.appendChild(activeDragItem);
+        dropzone.classList.remove('hovered');
+        dropzone.classList.add('success');
+		activeDragItem.classList.add("transl");
+		if(document.querySelectorAll('.box > .drag-item').length == 0 ){
+			$("#info").show("slow");
+		}
+    } else {
+      activeDragItem.style.transform = "translate(0, 0)";
+	  
+    }
+	
+	
+	
+	
+       
+      });
+    });
+  </script>
+</body>
+</html>
+	  
+	  
+
+</body>
+</html>
+
+
