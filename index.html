@@ -1,58 +1,77 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Bölünme</title>
- <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    
+
     body {
       font-family: Arial, sans-serif;
     }
-    
+
+    .correct{
+      border-color: green !important;
+      background: green;
+      color: white;
+    }
+
+
+    .wrong{
+      border-color: red !important;
+      background: red;
+      color: white;
+    }
+
     .container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
     }
-	#info {
-		display:none;
-	  font-size: 16px;
-	  line-height: 1.5;
-	  margin: 0 auto;
-	  max-width: 800px;
-	  padding: 20px;
-	}
 
-	#info h1 {
-	  font-size: 24px;
-	  font-weight: bold;
-	  margin-bottom: 20px;
-	}
+    #info {
+      display: none;
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 0 auto;
+      max-width: 800px;
+      padding: 20px;
+    }
 
-	#info b {
-	  font-weight: bold;
-	}
+    #info h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
 
-	#info strong {
-	  font-weight: bold;
-	}
+    #info b {
+      font-weight: bold;
+    }
 
-	#info br {
-	  content: "";
-	  display: block;
-	  margin-bottom: 20px;
-	}
-	.success{
-		border-color: green !important;
-	}
-    
+    #info strong {
+      font-weight: bold;
+    }
+
+    #info br {
+      content: "";
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .success {
+      border-color: green !important;
+    }
+
     .box {
       display: flex;
       flex-wrap: wrap;
@@ -60,23 +79,23 @@
       align-items: center;
       width: 100%;
       margin-bottom: 10px;
-	  min-height:10vh;
+      min-height: 10vh;
     }
-    
+
     .drag-item {
       display: inline-block;
       padding: 10px;
       margin: 5px;
       background-color: #f2f2f2;
       color: #333;
-      border: 1px solid #ccc;
+
       border-radius: 4px;
       text-align: center;
       cursor: move;
-	  display: grid;
-    align-content: center;
+      display: grid;
+      align-content: center;
     }
-    
+
     .images {
       display: flex;
       flex-wrap: wrap;
@@ -84,143 +103,516 @@
       align-items: center;
       width: 100%;
     }
-    
+
     .dropzone {
-		width: 19%;
-		height: auto;
-		margin: 5px;
-		
-		border: 2px dashed #333;
-		border-radius: 4px;
-		text-align: -webkit-center;
+      width: 19%;
+      height: auto;
+      margin: 5px;
+
+      border: 2px dashed #333;
+      border-radius: 4px;
+      text-align: -webkit-center;
     }
-    
+
     .drag-image {
       max-width: 100%;
-      height: auto;
-      border: 1px solid #ccc;
+      height: 200px;
+
       border-radius: 4px;
       cursor: move;
     }
-    
+
     /* Mobil cihazlarda boyutlandırma için CSS */
-    @media screen and (max-width: 480px) {
-      .drag-item {
-        margin: 5px 5px;
-      }
-      .images {
-        flex-direction: row;
-        align-items: center;
-      }
-	  .dropzone {
-		width: 33%;
-		}
-	  
-    } 
-	 
-	
-	.transl{
-		
-	}
-	</style>
-</head>
-<body>
-  <div class="container">
-    <div class="box">
-	  <div class="drag-item" draggable="true" zone-id="2">Metafaz</div>
-      <div class="drag-item" draggable="true" zone-id="1">Profaz</div>
-      <div class="drag-item" draggable="true" zone-id="4">Telofaz</div>
-      <div class="drag-item" draggable="true" zone-id="3">Anafaz</div>
-      <div class="drag-item" draggable="true" zone-id="5">Sitokinez</div>
+    .drag-item {
+      margin: 5px 5px;
+    }
+
+    .images {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .dropzone {
+      width: 23%;
+    }
+
+    #checkButton{
+      display: none;
+    }
+
+    h2 {
+      color: #333;
+    }
+    
+    .question {
+      margin-bottom: 20px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       
+    display: none;
+    width: auto;
+    }
+
+    .questionshowd{
+      margin-bottom: 20px;
+      width: auto;
+    }
+    
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    input[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    #result {
+
+      margin-top: 10%;
+      font-weight: bold;
+      text-align: center;
+      left: 5%;
+      position: fixed;
+      top: 0;
+    }
+
+    ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+li label {
+  display: inline;
+  margin-left: 5px;
+}
+#second{
+  display: none;
+  margin: auto;
+  width: 50%;
+}
+  </style>
+</head>
+
+<body>
+  <div class="container" id="first">
+    <div class="box">
+
     </div>
+    
     <div class="images">
-      <div class="dropzone" zone-id="1"><img src="images/1.jpeg" class="drag-image" draggable="true" alt="Görsel 1"></div>
-      <div class="dropzone" zone-id="3"><img src="images/2.jpeg" class="drag-image" draggable="true" alt="Görsel 2"></div>
-      <div class="dropzone" zone-id="2"><img src="images/3.jpeg" class="drag-image" draggable="true" alt="Görsel 3"></div>
-      <div class="dropzone" zone-id="4"><img src="images/4.jpeg" class="drag-image" draggable="true" alt="Görsel 4"></div>
-      <div class="dropzone" zone-id="5"><img src="images/5.jpeg" class="drag-image" draggable="true" alt="Görsel 5"></div>
     </div>
-</div>
 
-<div id="info">
-<h1>Mitoz Bölünme</h1>
-<b>Profaz (Prophase):</b> Kromatin iplikleri kısalarak kromozomlar meydana gelir. Her bir kromozom iki kromatid içerir ve bunlar bir sentromer adı verilen birleşim noktasıyla birbirlerine bağlanırlar. Çekirdek zarı ve nükleolus kaybolur, sentrozomlar kutuplara hareket eder ve mitotik iplikler çekirdek etrafında oluşur.
+    <div id="checkButton">
+      <button type="button" id="checkbtn" class="btn btn-gray" style="background: #f2f2f2;width: 200px;height: 100px;font-size: 29px;">Kontrol Et</button>
+    </div>
+  </div>
 
-<strong>Metafaz (Metaphase):</strong> Kromozomlar mitotik iplikler aracılığıyla hücrenin ekvator bölgesine hizalanır. Kromozomlar merkezdeki çizgi (metafaz levhası) üzerinde düzenli bir şekilde sıralanırlar.
-<br>
-<strong>Anafaz (Anaphase):</strong> Kromatidlerin sentromerleri ayrılır ve mitotik iplikler tarafından zıt kutuplara taşınır. Bu sayede kromatidler ayrı kromozomlar haline gelirler.
-<br>
-<strong>Telofaz (Telophase):</strong> Kromozomlar, kutuplara doğru hareket ederken kromatin ipliklerine geri dönüşürler. Çekirdek zarı ve nükleolus tekrar oluşur, mitotik iplikler kaybolur. Bu safhanın sonunda, tek hücreli organizmalar için, sitokinez adı verilen bir süreçle hücre bölünür ve iki ayrı hücre oluşur. Çok hücreli organizmalarda ise, sitokinez bir sonraki safhada gerçekleşir.
-<br>
-<strong>Sitokinez (Cytokinesis):</strong> Telofaz safhasının sonunda, hücrenin ortasında bir çentik oluşur ve bu çentik hücre bölünmesine neden olur. Hayvan hücrelerinde, bir hücre zarı sıkışır ve hücre iki ayrı hücreye ayrılır. Bitki hücrelerinde ise, hücre duvarı, hücre zarının içine doğru oluşur ve sonunda iki ayrı hücre oluşur.
 
-</div>
-	   
-	   	  
+  <div class="container" id="second">
+
+
+  
+    <div class="question" >
+      <h5>Soru 1:</h5>
+      <p>Mayoz bölünme nedir?</p>
+      <ul>
+        <li>
+          <input type="radio" name="q1" value="a" id="q1a">
+          <label for="q1a">Hücre bölünmesi sırasında kromozom sayısının ikiye bölündüğü süreç</label>
+        </li>
+        <li>
+          <input type="radio" name="q1" value="b" id="q1b">
+          <label for="q1b">Hücre bölünmesi sırasında kromozomların kopyalanması ve ayrılması süreci</label>
+        </li>
+        <li>
+          <input type="radio" name="q1" value="c" id="q1c">
+          <label for="q1c">Hücre bölünmesi sırasında sitoplazmanın ikiye bölünmesi süreci</label>
+        </li>
+        <li>
+          <input type="radio" name="q1" value="d" id="q1d">
+          <label for="q1d">Hücre bölünmesi sırasında kromozomların birbirine karıştığı süreç</label>
+        </li>
+      </ul>
+      <button type="submit" class="btn btn-secondary next">Sonraki</button>
+    </div>
+
+
+    <div class="question">
+      <h5>Soru 2:</h5>
+      <p>Mayoz bölünme kaç evrede gerçekleşir?</p>
+      <ul>
+        <li>
+          <input type="radio" name="q2" value="a" id="q2a">
+          <label for="q2a">1</label>
+        </li>
+        <li>
+          <input type="radio" name="q2" value="b" id="q2b">
+          <label for="q2b">2</label>
+        </li>
+        <li>
+          <input type="radio" name="q2" value="c" id="q2c">
+          <label for="q2c">3</label>
+        </li>
+        <li>
+          <input type="radio" name="q2" value="d" id="q2d">
+          <label for="q2d">4 </label>
+        </li>
+      </ul>
+      <button type="submit" class="btn btn-secondary next">Sonraki</button>
+    </div>
+    
+    <div class="question">
+      <h5>Soru 3:</h5>
+      <p>Mayoz bölünme sonucunda kaç adet hücre oluşur?</p>
+      <ul>
+        <li>
+          <input type="radio" name="q3" value="a" id="q3a">
+          <label for="q3a">1 </label>
+        </li>
+        <li>
+          <input type="radio" name="q3" value="b" id="q3b">
+          <label for="q3b">2</label>
+        </li>
+        <li>
+          <input type="radio" name="q3" value="c" id="q3c">
+          <label for="q3c">3</label>
+        </li>
+        
+        <li>
+          <input type="radio" name="q3" value="d" id="q3d">
+          <label for="q3d">4</label>
+        </li>
+        </ul>
+        <button type="submit" class="btn btn-secondary next">Sonraki</button>
+          </div>
+          <div class="question">
+            <h5>Soru 4:</h5>
+            <p>Mayoz bölünme ile ilgili hangisi yanlıştır?</p>
+            <ul>
+              <li>
+                <input type="radio" name="q4" value="a" id="q4a">
+                <label for="q4a">Mayoz bölünme sonucunda oluşan hücrelerin kromozom sayısı, başlangıçtaki hücrenin yarısı kadardır. </label>
+              </li>
+              <li>
+                <input type="radio" name="q4" value="b" id="q4b">
+                <label for="q4b">Mayoz bölünme sırasında homolog kromozomlar birbirine paralel gelir ve çift iplikçik oluştururlar</label>
+              </li>
+              <li>
+                <input type="radio" name="q4" value="c" id="q4c">
+                <label for="q4c">Mayoz bölünme sonucunda oluşan hücrelerin genetik materyali farklıdır</label>
+              </li>
+
+              <li>
+                <input type="radio" name="q4" value="d" id="q4d">
+                <label for="q4d">Mayoz bölünme sırasında kromozomların kopyalanması yapılmaz.</label>
+              </li>
+            </ul>
+            <button type="submit" class="btn btn-secondary next">Sonraki</button>
+          </div>
+          <div class="question">
+            <h5>Soru 5:</h5>
+            <p>Mayoz bölünme ile ilgili hangisi doğrudur?</p>
+            <ul>
+              <li>
+                <input type="radio" name="q5" value="a" id="q5a">
+                <label for="q5a">Mayoz bölünme sadece üreme hücrelerinde gerçekleşir. </label>
+              </li>
+              <li>
+                <input type="radio" name="q5" value="b" id="q5b">
+                <label for="q5b">Mayoz bölünme sonucunda oluşan hücrelerin kromozom sayısı, başlangıçtaki hücrenin iki katıdır. </label>
+              </li>
+              <li>
+                <input type="radio" name="q5" value="c" id="q5c">
+                <label for="q5c">Mayoz bölünme sırasında homolog kromozomlar birbirine karışır ve yeni kombinasyonlar oluştururlar. </label>
+              </li>
+              <li>
+                <input type="radio" name="q5" value="d" id="q5d">
+                <label for="q5d">Mayoz bölünme sırasında oluşan hücreler tamamen aynı genetik materyale sahiptirler.</label>
+              </li>
+            </ul>
+            <button type="submit" class="btn btn-secondary next" onclick="showResult()">Submit</button>
+          </div>
+        
+        
+          <div id="result"></div>
+          <script>
+            function showResult() {
+              var answers = ["a", "b", "d", "d", "a"];
+              var total = 0;
+              
+              for (var i = 1; i <= 5; i++) {
+                var radios = document.getElementsByName("q" + i);
+                
+                var isCorrect = false;
+                for (var j = 0; j < radios.length; j++) {
+                  var radio = radios[j];
+                  
+                  if (radio.checked && radio.value === answers[i - 1]) {
+                    total++;
+                    radio.parentElement.classList.add("correct");
+                    isCorrect = true;
+                    break;
+                  }
+                  
+                }
+                if(isCorrect == false){
+                    radio.parentElement.classList.add("wrong");
+                  }
+              }
+              
+              document.getElementById("result").innerHTML = "Sonuç: " + total + "/5 doğru";
+
+                $(".question").addClass('questionshowd').removeClass('question');
+                $(".questionshowd").show();;
+                $("button.next").hide();
+                $("button.next").parent().append('<hr>');
+
+              
+            }
+          </script>
+        </body>
+        </html>
+
+  </div>
+
+
   <!-- Burada gerekli JavaScript kütüphanelerini yüklüyoruz -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <script>
-    /* Burada JavaScript kodlarınızı yazabilirsiniz */
-    const dragItems = document.querySelectorAll('.drag-item');
-    const dropzones = document.querySelectorAll('.dropzone');
-    
-    dragItems.forEach(dragItem => {
-      dragItem.addEventListener('dragstart', () => {
-        dragItem.classList.add('dragging');
+    var dragData = [{
+        "image": "Anafaz-1.png",
+        "name": "Anafaz 1",
+        "order": 4
+      },
+      {
+        "image": "Anafaz-2.png",
+        "name": "Anafaz 2",
+        "order": 9
+      },
+      {
+        "image": "Interfaz.png",
+        "name": "Interfaz",
+        "order": 1
+      },
+      {
+        "image": "Interkinez.png",
+        "name": "Interkinez",
+        "order": 6
+      },
+      {
+        "image": "Profaz-1.png",
+        "name": "Profaz 1",
+        "order": 2
+      },
+      {
+        "image": "profaz-2.png",
+        "name": "profaz 2",
+        "order": 7
+      },
+      {
+        "image": "Metafaz-1.png",
+        "name": "Metafaz 1",
+        "order": 3
+      },
+      {
+        "image": "Metafaz-2.png",
+        "name": "Metafaz 2",
+        "order": 8
+      },
+      {
+        "image": "Telofaz-1.png",
+        "name": "Telofaz 1",
+        "order": 5
+      },
+      {
+        "image": "Telofaz-2.png",
+        "name": "Telofaz 2",
+        "order": 10
+      }
+    ];
+
+    var sortedData = dragData.sort((a, b) => a.order - b.order);
+    $(document).ready(function () {
+
+      var boxDatas = [];
+      var imageDatas = [];
+      dragData.forEach(el => {
+        var boxData = `<div class="drag-item" draggable="true" zone-id="${el.order}">${el.name}</div>`;
+        boxDatas.push(boxData);
+        var imageData = `<div class="dropzone" zone-id="${el.order}"><img src="images/${el.image}" class="drag-image" draggable="true">
+      </div>`;
+        imageDatas.push(imageData);
+      })
+
+      //boxDatas = boxDatas.sort( () => .5 - Math.random() );
+      //imageDatas = imageDatas.sort( () => .5 - Math.random() );
+
+      boxDatas.forEach(el => {
+        $(".box").append(el)
       });
-    
-      dragItem.addEventListener('dragend', () => {
-        dragItem.classList.remove('dragging');
+      imageDatas.forEach(el => {
+        $(".images").append(el)
       });
-    });
-    
-    dropzones.forEach(dropzone => {
-      dropzone.addEventListener('dragover', e => {
-        e.preventDefault();
-        const activeDragItem = document.querySelector('.dragging');
-        dropzone.classList.add('hovered');
+
+      
+
+      /* Burada JavaScript kodlarınızı yazabilirsiniz */
+      const dragItems = document.querySelectorAll('.drag-item');
+      const dropzones = document.querySelectorAll('.dropzone');
+
+      dragItems.forEach(dragItem => {
+        dragItem.addEventListener('dragstart', () => {
+          dragItem.classList.add('dragging');
+        });
+
+        dragItem.addEventListener('dragend', () => {
+          dragItem.classList.remove('dragging');
+        });
       });
-    
-      dropzone.addEventListener('dragleave', () => {
-        dropzone.classList.remove('hovered');
+      
+      dropzones.forEach(dropzone => {
+        dropzone.addEventListener('dragover', e => {
+          e.preventDefault();
+          const activeDragItem = document.querySelector('.dragging');
+          dropzone.classList.add('hovered');
+        });
+
+        dropzone.addEventListener('dragleave', () => {
+          dropzone.classList.remove('hovered');
+        });
+
+        dropzone.addEventListener('drop', () => {
+          const activeDragItem = document.querySelector('.dragging');
+
+          const currentZoneId = dropzone.getAttribute("zone-id");
+          const currentDragZoneId = activeDragItem.getAttribute("zone-id");
+ 
+
+          if (currentZoneId === currentDragZoneId) {
+            dropzone.appendChild(activeDragItem);
+            dropzone.classList.remove('hovered');
+            dropzone.classList.add('success');
+            activeDragItem.classList.add("transl");
+            if (document.querySelectorAll('.box > .drag-item').length == 0) {
+
+              dragItems.forEach(dragItem => {
+                dragItem.removeEventListener('dragstart', () => {});
+                dragItem.removeEventListener('dragend', () => {});
+              });
+              dropzones.forEach(dropzone => {
+                dropzone.addEventListener('dragover', () => {});
+                dropzone.addEventListener('dragleave', () => {});
+                dropzone.addEventListener('drop', () => {});
+              });
+              $( ".images" ).sortable();
+              $("#checkButton").show()
+
+              Swal.fire(
+                'Çok İyi!',
+                'Şimdi De Görselleri Sıralamalısın!',
+                'success'
+              );
+
+              $("#first").hide('slow',function(){
+                $("#second").show();
+            });
+
+            }
+          } else {
+            activeDragItem.style.transform = "translate(0, 0)";
+
+          }
+
+
+
+
+
+        });
       });
-    
-      dropzone.addEventListener('drop', () => {
-        const activeDragItem = document.querySelector('.dragging');
-		
-		const currentZoneId = dropzone.getAttribute("zone-id");
-    const currentDragZoneId = activeDragItem.getAttribute("zone-id");
-	console.log(currentDragZoneId);
-	console.log(currentZoneId);
-    
-    if (currentZoneId === currentDragZoneId) {
-       dropzone.appendChild(activeDragItem);
-        dropzone.classList.remove('hovered');
-        dropzone.classList.add('success');
-		activeDragItem.classList.add("transl");
-		if(document.querySelectorAll('.box > .drag-item').length == 0 ){
-			$("#info").show("slow");
-		}
-    } else {
-      activeDragItem.style.transform = "translate(0, 0)";
-	  
-    }
-	
-	
-	
-	
-       
+
+      
+      $("#checkbtn").click(function(){
+        var i=0;
+        var isCorrect = true;
+        document.querySelectorAll(".dropzone").forEach((el)=>{
+           i++;
+          var zoneId = $(el).attr("zone-id");
+          if(zoneId != i && isCorrect === true){
+            isCorrect = false
+          }
+        });
+        if(isCorrect == false){
+          Swal.fire(
+                'Sorun var!',
+                'Sıralarken Hata Yapmış Gibi Görünüyorsun!',
+                'error'
+            );
+        }else{
+          Swal.fire(
+              'Çok İyi!',
+              'Çok İyisin!',
+              'success'
+            );
+        }
       });
+
+      var currentQuestion = 0;
+
+      // Submit düğmesine tıklandığında sonucu kontrol eden ve gösteren fonksiyon
+      $("button[type='submit']").click(function() {
+        // Doğru cevapları kontrol etmek için gerekli kodları buraya ekleyin
+        
+        // Sonuçları göstermek için gerekli kodları buraya ekleyin
+      });
+      
+      // İleri düğmesine tıklandığında bir sonraki soruyu gösteren fonksiyon
+      $("button.next").click(function() {
+        // Mevcut soruyu gizle
+        $(".question").eq(currentQuestion).hide();
+        
+        // Bir sonraki soruyu göster
+        currentQuestion++;
+        $(".question").eq(currentQuestion).show();
+        
+        // İleri düğmesini gizle veya son soruda ise Submit düğmesini göster
+        if (currentQuestion === $(".question").length - 1) {
+          
+          $("button[type='submit']").show();
+        }
+      });
+
+      // İlk soruyu göster
+      $(".question").eq(currentQuestion).show();
+      
+      // İleri düğmesini gizle
+      //$("button.next").hide();
+    
+
     });
   </script>
 </body>
+
 </html>
-	  
-	  
+
+
 
 </body>
+
 </html>
-
-
