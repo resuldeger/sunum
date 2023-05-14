@@ -422,7 +422,7 @@ li label {
         "order": 2
       },
       {
-        "image": "profaz-2.png",
+        "image": "Profaz-2.png",
         "name": "profaz 2",
         "order": 7
       },
@@ -461,8 +461,8 @@ li label {
         imageDatas.push(imageData);
       })
 
-      //boxDatas = boxDatas.sort( () => .5 - Math.random() );
-      //imageDatas = imageDatas.sort( () => .5 - Math.random() );
+      boxDatas = boxDatas.sort( () => .5 - Math.random() );
+      imageDatas = imageDatas.sort( () => .5 - Math.random() );
 
       boxDatas.forEach(el => {
         $(".box").append(el)
